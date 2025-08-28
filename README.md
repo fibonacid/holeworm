@@ -54,4 +54,7 @@ Notifies the user of the request using the operating system's notification syste
 When the user approves the request, runs `wormhole send` with the requested path.
 Keeps the connection to the relay indefinitely open to receive new requests.
 
+The agent initializes itself with a public/private key pair to authenticate with the relay.
+The agent id is a short unique id that is linked with the client using the key pair.
+
 
