@@ -45,7 +45,7 @@ sequenceDiagram
 
 ### Relay
 
-Uses a SQLite database to store data necessary to act as a relay.   
+Uses an in-memory database to store data necessary to act as a relay.   
 Emits server sent events to the **agent** when a client requests a file.   
 Emits server sent events to the **client** when the agent sends a wormhole code. 
 
