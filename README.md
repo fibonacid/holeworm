@@ -16,6 +16,7 @@ A relay server in the middle forwards wormhole codes and runs wormhole get/send 
 - `holeworm/client`: client to request a file
 - `holeworm/agent`: receives file request and grants access
 - `holeworm/common`: shared code between modules
+- `holeworm/cli`: command line interface
 
 ```mermaid
 sequenceDiagram
@@ -56,5 +57,83 @@ Keeps the connection to the relay indefinitely open to receive new requests.
 
 The agent initializes itself with a public/private key pair to authenticate with the relay.
 The agent id is a short unique id that is linked with the client using the key pair.
+
+### CLI
+
+The CLI (`holeworm` command) allows the user to run client and agent commands.
+
+#### Download subcommands
+
+```bash
+holeworm download <module>
+```
+
+Where `<module>` is one of `relay`, `client`, or `agent`.
+Each module is built as a standalone binary, including the boostrap `holeworm` command.
+
+```bash
+for os in linux darwin windows; do
+  for arch in amd64 arm64; do
+    GOOS=$os GOARCH=$arch go build -o dist/$os-$arch/relay ./relay/cmd
+    GOOS=$os GOARCH=$arch go build -o dist/$os-$arch/client ./client/cmd
+    GOOS=$os GOARCH=$arch go build -o dist/$os-$arch/agent ./agent/cmd
+  done
+done
+```
+
+The `holeworm` command will fetch the appropriate binary for your OS and architecture from Github releases
+and puts it in `~/.holeworm/bin/`.
+
+The bootstrap command can be installed in `/usr/local/bin`, so you don't have modify your PATH.
+
+#### Agent Commands
+
+Install subcommand:
+
+```bash
+holeworm download agent
+```
+
+```bash
+holeworm agent init --relay <relay-url>
+``` 
+
+Initializes the agent, generates a key pair and registers with the relay.
+Some data is stored in `~/.holeworm/`, including:
+
+```
+privkey.pem  # private key
+pubkey.pem   # public key
+config.json  # contains agent id and relay url
+```
+
+The command outputs the agent id, which is needed by the client to request files.
+If you lose the agent id, run the command again to get it.
+
+```bash
+holeworm agent id
+``` 
+
+To debug, run this command to receive a log feed:
+
+```bash
+holeworm agent log 
+```
+
+#### Client Commands
+
+```bash
+holeworm get <path>
+```
+
+Requests a file by path from the relay specified in `~/.holeworm/config.json`.
+
+
+
+
+
+
+
+
 
 
