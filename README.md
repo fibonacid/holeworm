@@ -1,6 +1,6 @@
 # holeworm 🪱
 
-Inverse [magic-wormhole](https://github.com/magic-wormhole/magic-wormhole), host 1 request a path, host 2 grants access to it.
+Inverse [magic-wormhole](https://github.com/magic-wormhole/magic-wormhole), host 1 request a path, host 2 grants access to it from notification service.
 A relay server in the middle forwards wormhole codes and runs wormhole get/send on behalf of the two hosts.
 
 ## Usage
