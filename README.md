@@ -3,6 +3,11 @@
 Inverse [magic-wormhole](https://github.com/magic-wormhole/magic-wormhole), host 1 request a path, host 2 grants access to it from notification service.
 A relay server in the middle forwards wormhole codes and runs wormhole get/send on behalf of the two hosts.
 
+## Why
+
+Easy way to copy files from a server to your computer, using OS notifications to allow or deny the transfer.
+Uses `wormhole` under the hood to handle the peer to peer file transfer.
+
 ## Usage
 
 1. Install client and agent on respective machines (TBD).
