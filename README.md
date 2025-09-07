@@ -20,19 +20,22 @@ A relay server in the middle forwards wormhole codes and runs wormhole get/send 
 
 ```mermaid
 sequenceDiagram
+    actor UA as User A
     participant C as Client
     participant R as Relay
     participant A as Agent
-    actor U as User
+    actor UB as User B
 
+    UA-->>C:holeworm get
     C->>R: Request file by path
     R->>A: Forward request
-    A->>U: Notify user of request
-    U->>A: User approves request
+    A-->>UB: Notify user of request
+    UB-->>A: User approves request
     A->>A: Run wormhole send
     A->>R: Send wormhole code
     R->>C: Forward wormhole code
     C->>C: Run wormhole get
+    UB-->>UA: P2P File Transfer (using wormhole)
 ```
 
 ### Relay
